@@ -20,41 +20,6 @@ app.get('/', logger, (req: Request, res: Response) => {
 
 // users CRUD
 app.use("/users", userRoutes);
-// app.post("/users", async(req: Request, res: Response) => {
-//     const {name, email} = req.body;
-
-//     try{
-//         const result = await pool.query(`INSERT INTO users(name, email) VALUES($1, $2) RETURNING *`, [name, email]);
-//         res.status(201).json({
-//             success: false,
-//             message: "Data Inserted successfully",
-//             data: result.rows[0],
-//         });
-//     }catch(err: any){
-//         res.status(500).json({
-//             success: false,
-//             message: err.message,
-//         });
-//     }
-// })
-
-app.get("/users", logger, async(req: Request, res: Response) => {
-    try{
-        const result = await pool.query(`SELECT * FROM users`);
-
-        res.status(200).json({
-            success: true,
-            message: "Users retrieved successfully",
-            data: result.rows,
-        })
-    }catch(err: any){
-        res.status(500).json({
-            success: false,
-            message: err.message,
-            details: err
-        })
-    }
-})
 
 app.get("/users/:id", async(req: Request, res: Response) => {
     try{
