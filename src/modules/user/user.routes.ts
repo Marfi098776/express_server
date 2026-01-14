@@ -1,16 +1,18 @@
 import express, { Request, Response } from "express";
 import { userController } from "./user.controller";
+import logger from "../../middleware/logger";
+import auth from "../../middleware/auth";
 
 const router = express.Router();
 
-router.post("/", userController.createUser)
+router.post("/",logger, userController.createUser)
 
-router.get("/", userController.getUser)
+router.get("/",logger, auth(), userController.getUser)
 
-router.get("/:id", userController.getSingleUser)
+router.get("/:id",logger, userController.getSingleUser)
 
-router.put("/:id", userController.editUser)
+router.put("/:id",logger, userController.editUser)
 
-router.delete("/:id", userController.deleteUser)
+router.delete("/:id",logger, userController.deleteUser)
 
 export const userRoutes = router;
